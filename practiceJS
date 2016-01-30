@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
+        <title>Web Design | Inspired Web Design</title>
+        <link href="/css/stylesheet.css" type="text/css" rel="stylesheet" media="screen">
+        <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0">
+
+        <script>
+            function swap(id)
+            {
+                document.getElementById(id).src = "puppy2.jpg";
+            }
+            function swapOff(id)
+            {
+                document.getElementById(id).src = "puppy1.jpg";
+            }
+            function swapOver(id) {
+                document.getElementById(id).src = "puppy2.jpg";
+            }
+            function swapOut(id) {
+                document.getElementById(id).src = "puppy1.jpg";
+            }
+             function bigImg(x) {
+                x.style.height = "64px";
+                x.style.width = "64px";
+            }
+
+            function normalImg(x) {
+                x.style.height = "32px";
+                x.style.width = "32px";
+            }
+
+            var slideimages = new Array();
+            slideimages[0] = new Image();
+            slideimages[0].src = "puppy1.jpg";
+            slideimages[1] = new Image();
+            slideimages[1].src = "puppy2.jpg";
+            slideimages[2] = new Image();
+            slideimages[2].src = "puppy3.jpg";
+            slideimages[3] = new Image();
+            slideimages[3].src = "puppy4.jpg";
+            
+        </script>
+
+    </head>
+    <body>
+       
+        <ul>
+            <li>The software development process and some standard methodologies</li>
+            <li>Creative, pleasant, mobile user interface creation</li>
+            <li><a href="javaScript.php">JavaScript objects</a></li>
+            <li>DOM manipulation</li>
+            <li>CSS3 transitions</li>
+            <li>CSS3 animations</li>
+            <li>Using local data storage</li>
+            <li>AJAX interactions with remote services</li>
+            <li>JSON data serialization</li>
+        </ul>
+        <h1>JavaScript Rollover</h1>
+        <p>When you roll over this image it will change into another image.This uses 
+            associative arrays or hashes, known in JavaScript merely as objects.</p>
+        <p>Using this code you can associate a key string with a value string.</p>
+
+        <a href="" onMouseover="swap('firstPic');"
+           onClick="return false;"
+           onMouseout="swapOff('firstPic');">
+            <img src="puppy1.jpg" alt="Swap Test" id="firstPic"></a>
+
+        <p>After following the tutorial, I could never get this to work. I found different code on w3schools and got it to
+            work. This code just takes a pictures and increases the size upon scrolling over. It makes me wonder if maybe some of 
+            the code from the tutorial was outdated. I know Netbeans flagged some of the code as obsolete.</p>
+        <p>After finding the code below, I revised my code above and now it works. Success!
+
+        <h2>Different Code, Same Idea</h2>
+        <a href="#" onmouseover="swapOver('littlePup');" onmouseout="swapOut('littlePup');">
+            <img src="puppy1.jpg" id="littlePup" alt="Puppy Swap">
+        </a>
+        <br><a href="https://www.youtube.com/watch?v=Q3CJU6yng-Q">Tutorial on Image Swapping</a>
+
+        <h2>Image enlarges on Mouse Over</h2>
+        <img onmouseover="bigImg(this)" onmouseout="normalImg(this)" src="puppy1.jpg" alt="website" width="32" height="32">
+
+        <p>The function bigImg() is triggered when the user moves the mouse pointer over the image.</p>
+        <p>The function normalImg() is triggered when the mouse pointer is moved out of the image.</p>
+
+        <h2>Continuous Looping Slideshow</h2>
+       
+        <img src="puppy1.jpg" id="slideshow" alt="Slideshow Practice" width="284" height="176">
+        
+        <script>
+            var step = 0;
+            function slideit() {
+                if (!document.images)
+                    return;
+                document.getElementById('slideshow').src = slideimages[step].src;
+                if (step < 3)
+                    step++;
+                else
+                    step = 0;
+                setTimeout("slideit()",2500);
+            }
+            slideit();
+         </script>
+    </body>
+</html>

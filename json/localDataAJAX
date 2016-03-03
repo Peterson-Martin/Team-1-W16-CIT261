@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<!--
+-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="/favicon.ico" type="image/x-icon">
+        <title>Local Data Storage | Inspired Web Design</title>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0, maximum-scale=1.0">
+        <script>
+           function initialize() {
+                var browserSupport = (('localStorage' in window) && window['localStorage'] !== null);
+                if (!browserSupport) {
+                    document.getElementById('storage').innerHTML = "<p>Not supported</p>";
+                    return;
+                }
+                if (window.localStorage.length !== 0) {
+                    document.getElementById('firstName').value = window.localStorage.getItem('firstName');
+
+                }
+
+                function storeInfo(fName, lName) {
+                    window.localStorage.getItem('firstName', fName);
+
+                }
+
+                function clearInfo(strToStore) {
+                    window.localStorage.clear();
+                }
+                window.onload = initialize;
+
+                function loadJSON() {
+                    var data_file = "dataFive.json";
+                    var http_request = new XMLHttpRequest();
+                    
+                    xmlhttp.onreadystatechange = function ()
+                    {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+                        {
+                            myReply(xmlhttp.responseText);
+                        }
+                    };
+                    xmlhttp.open("GET", data_file, true);
+                    xmlhttp.send();
+                }
+                
+                    function myReply(response) {
+                    document.getElementById("formReply").innerHTML = view;
+                    var months = JSON.parse(response);
+                    var view = " ";
+                    var view += "<p>" + FirstName + "</p>";
+                }
+        
+                    if (typeof (Storage) !== "undefined") {
+                        localStorage.setItem(FirstName, null);
+                    }
+                    else
+                    {
+                        document.getElementById("div").innerHTML = "Your browser does not support local storage";
+                    }
+                }
+                
+        </script>
+    </head>
+
+    <body>
+        <section>
+            <div id="formReply">
+            <form action="" method="post" id="dataForm">
+                <fieldset name="Local Storage" id="storage">
+                    <p><label id="firstLabel" for="firstName">First Name</label>
+                        <input id="firstName" name="firstName"></p>
+
+                    <input type="button" value="Save" onclick= "storeInfo(
+                                        document.querySelector('#firstName').value)">
+
+                    <input type="button" value="Clear" onclick="clearInfo()">
+                </fieldset>
+            </form>
+            </div>
+
+        </section>	
+    </body>
+
+</html>

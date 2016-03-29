@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<!--
+Created by Heather Jensen at http://theinspiredwebdesign.com 
+-->
+<html>
+    <head>
+        <meta charset="UTF-8">
+       <style>
+            #transition{
+                width: 100px;
+                height: 75px;
+                -webkit-transition: width 2s;
+                transition: width 2s;
+            }
+            #transition:hover{
+                width: 250px;
+            }
+            #transform{
+                width:294px;
+                height:auto;
+            }
+            #transform:hover{
+                -ms-transform: rotate(180deg);
+                -webkit-transform:rotate(180deg);
+                transform:rotate(180deg);
+            }
+            div{
+                border: 5px;
+            }
+            div#myDiv {
+                width:300px;
+                height:100px;
+                background-color:blue;
+                border: 1px solid black;
+            }
+            div#myDiv:hover {
+                -ms-transform: rotate(20deg); /* IE 9 */
+                -webkit-transform: rotate(20deg); /* Safari */
+                transform: rotate(20deg); /* Standard syntax */
+            }
+            #transform{
+                width:294px;
+                height:auto; 
+            }
+            #transform2:hover{
+                -webkit-transform: rotateY(130deg); /* Safari */
+                transform: rotateY(130deg);  
+            }
+        </style>
+
+    </head>
+    <body>
+        
+        <div>
+            <h2>CSS3 Transitions</h2>
+
+            <img src="rainbow.jpeg" id="transition" alt="CSS Transition Practice">
+            <p>When you place your hover over the image it grows. </p>
+
+            <h2>CSS3 2D Transform</h2>
+            <div id="myDiv"></div>
+
+            <img src="rainbow.jpeg" id="transform" alt="Transform Practice">
+            <p>When you hover over the image, it rotates. </p> 
+
+            <h2>CSS3 3D Transform</h2>
+            <img src="rainbow.jpeg" id="transform2" alt="Transform Practice">
+            <p>When you hover over the image, it flips</p>
+
+        </div>
+
+        <? include "../modules/footer.php" ?>
+    </body>
+</html>

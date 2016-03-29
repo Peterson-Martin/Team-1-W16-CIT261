@@ -1,0 +1,58 @@
+<h1>DOM Manipulation</h1>
+        <h2>appendChild</h2>
+        <p><b>appendChild</b> adds an element to existing code like the example below.</p>
+
+        <ul id="animals">
+            <li>Lions</li>
+            <li>Tigers</li>
+            <li>Bears</li>
+        </ul>
+
+        <p>Click the button to append an item to the end of the list.</p>
+
+        <button onclick="myFunction()">Add</button>
+
+        <script>
+            function myFunction() {
+                var node = document.createElement("LI");
+                var textnode = document.createTextNode("Oh My!");
+                node.appendChild(textnode);
+                document.getElementById("animals").appendChild(node);
+            }
+        </script>
+        <h2>replaceChild</h2>
+        <p><b>replaceChild</b> replaces an element with another</p>
+
+        <ul id="ozList"><li>Lions</li><li>Tigers</li><li>Bears</li></ul>
+
+        <p>Click the button to replace the first item in the the list.</p>
+
+        <button onclick="replace()">Replace</button>
+
+        <script>
+            function replace() {
+                var textnode = document.createTextNode("Oh My!");
+                var item = document.getElementById("ozList").childNodes[0];
+                item.replaceChild(textnode, item.childNodes[0]);
+            }
+        </script>
+        
+        <h2>Combo</h2>
+        <p>I decided to try to append an list and then add to it.</p>
+        <ul id="list"><li>Lions</li><li>Tigers</li><li>Bears</li></ul>
+        <button onclick="combo()">Try Me</button>
+        <button onclick="substitute()">Substitute</button>
+        <script>
+            function combo(){
+                var element = document.createElement("LI");
+                var textnode = document.createTextNode("Elephants");
+                element.appendChild(textnode);
+                document.getElementById("list").appendChild(element);
+            }
+           
+            function substitute(){
+             var textnode=document.createTextNode("Snakes");
+             var source=document.getElementById("list").childNodes[0];
+             source.replaceChild(textnode, source.childNodes[0]);
+            }
+        </script>

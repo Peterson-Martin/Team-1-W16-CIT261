@@ -1,3 +1,4 @@
+
 var Calendar = function (o) {
 //Store div id
     this.divId = o.ParentID;
@@ -10,7 +11,7 @@ var Calendar = function (o) {
     // Set the current month, year
     var d = new Date();
     console.log("d == ", d);
-    this.CurrentMonth = d.getMonth();
+    this.CurrentMonth = d.getMonth(); //sets Date
     console.log("this.CurrentMonth == ", this.CurrentMonth);
     this.CurrentYear = d.getFullYear();
     console.log("this.CurrentYear == ", this.CurrentYear);
@@ -60,7 +61,7 @@ Calendar.prototype.previousMonth = function () {
     }
 
     this.showCurrent();
-};
+};//Goes to previous year
 Calendar.prototype.previousYear = function () {
     console.log(" ");
     console.log("Calendar.prototype.previousYear = function() {");
@@ -69,7 +70,7 @@ Calendar.prototype.previousYear = function () {
     console.log("this.CurrentYear - 1 i.e. this.CurrentYear == " + this.CurrentYear);
     this.showCurrent();
 };
-// 
+//Goes to next year
 Calendar.prototype.nextYear = function () {
     console.log(" ");
     console.log("Calendar.prototype.nextYear = function() {");
@@ -156,14 +157,12 @@ Calendar.prototype.Calendar = function (y, m) {
                 // Current month dates
             } else {
                 html += '<td id="currentmonthdates">' + (d) +
-                        //JSON and AJAX addition
-                        /*'<p id="demo">Vacation</p>'+
-                         '<button type="button" onclick="loadDoc("/views/dataThree.json", myFunction)">Vacation</button>' +
-                         '<button id="sickDay" type = "button" onclick = "sickDay()">Sick</button>'*/
-                        '<div class="radioButton"><input type="radio" class="timeOff" name="timeOff" value="vacation"> Vacation<br>' +
-                        '<input type="radio" class="timeOff" name="timeOff" value="sick">  Sick</div>' +
-                        '<button type="button" onclick="loadDoc("dataThree.json", myFunction)">Enter</button>' + '</td>';
-                console.log("d inside else { == " + d);
+                        '<div id="replaceButton"><input type="radio" name="timeOff" value="Vacation">Vacation <br>' +
+                        '<input type="radio"  name="timeOff" value="Sick">Sick</div>' +
+                        '<button type= "button" onclick= "loadJSON()">Enter</button><br>' +
+                        /*'<button type= "button" onclick= "saveStorage()">Save</button>' + 
+                        '<button type= "button" onclick= "clearLocal()">Clear</button>' +*/ '</td>';
+                console.log("d inside else { == " + d); //days?
                 p = 1;
                 console.log("p inside } else { == " + p);
             }
@@ -209,29 +208,50 @@ window.onload = function () {
     };
 
 };
-//JSON and AJAX addition
 
-function recordDay(url, cfunc) {
-    var xhttp;
-    xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-        if (xhttp.readyState == 4 && xhttp.status == 200) {
-            cfunc(xhttp);
+function loadJSON() {
+    var data_file = "/views/dataThree.json";
+    var http_request = new XMLHttpRequest();
+    try {
+        http_request = new XMLHttpRequest();
+    } catch (e) {
+        try {
+            http_request = new ActiveXObject("Msxml2.XMLHTTP");
+        } catch (e) {
+            try {
+                http_request = new ActiveXObject("Microsoft.XMLHTTP");
+            } catch (e) {
+                alert("Your browser broke!");
+                return false;
+            }
+        }
+    }
+
+    http_request.onreadystatechange = function () {
+        if (http_request.readyState == 4) {
+            var jsonObj = JSON.parse(http_request.responseText);
+            document.getElementById("replaceButton").innerHTML = jsonObj.answer;
         }
     };
-    xhttp.open("GET", url, true);
-    xhttp.send();
+    http_request.open("GET", data_file, true);
+    http_request.send();
 }
-function myFunction(xhttp) {
-    document.getElementById("radioButton").innerHTML = xhttp.responseText;
+/*function saveStorage() {
+    if (typeof (Storage) !== "undefined") {
+        localStorage.setItem("answer", "Recorded");
+        //var save=localStorage.setItem("answer");
+        var save = localStorage.getItem("answer");
+        //document.getElementById("replaceButton").innerHTML=localStorage.getItem("answer");
+    } else {
+        document.getElementById("replaceButton").innerHTML = "Sorry, your browser does not support web storage";
+    }
 }
+
+function clearLocal() {
+    clear: localStorage.clear();
+    return false;
+}*/
 
 // Get element by id
 function getId(id) {
     return document.getElementById(id);
-
-}
-
-localStorage.setItem('timeOff_value', $('input[name="timeOff"]:checked').val());
-alert(localStorage.getItem('timeOff_value'));
-  

@@ -1,15 +1,11 @@
-
 var Calendar = function (o) {
 //Store div id
     this.divId = o.ParentID;
-    // Days of week, starting on Sunday
-    this.DaysOfWeek = o.DaysOfWeek;
+    this.DaysOfWeek = o.DaysOfWeek;// Days of week, starting on Sunday
     console.log("this.DaysOfWeek == ", this.DaysOfWeek);
-    // Months, starting on January
-    this.Months = o.Months;
+    this.Months = o.Months;// Months, starting on January
     console.log("this.Months == ", this.Months);
-    // Set the current month, year
-    var d = new Date();
+    var d = new Date();// Set the current month, year
     console.log("d == ", d);
     this.CurrentMonth = d.getMonth(); //sets Date
     console.log("this.CurrentMonth == ", this.CurrentMonth);
@@ -23,7 +19,6 @@ var Calendar = function (o) {
     } else {
         this.f = 'M';
     }
-
     console.log("this.f == ", this.f);
 };
 // Goes to next month
@@ -41,7 +36,6 @@ Calendar.prototype.nextMonth = function () {
         this.CurrentMonth = this.CurrentMonth + 1;
         console.log("this.CurrentMonth + 1 == ", this.CurrentMonth);
     }
-
     this.showCurrent();
 };
 // Goes to previous month
@@ -59,7 +53,6 @@ Calendar.prototype.previousMonth = function () {
         this.CurrentMonth = this.CurrentMonth - 1;
         console.log("this.CurrentMonth - 1 == ", this.CurrentMonth);
     }
-
     this.showCurrent();
 };//Goes to previous year
 Calendar.prototype.previousYear = function () {
@@ -95,34 +88,28 @@ Calendar.prototype.Calendar = function (y, m) {
     console.log("this.CurrentYear == ", this.CurrentYear);
     typeof (y) == 'number' ? this.CurrentMonth = m : null;
     console.log("this.CurrentMonth == ", this.CurrentMonth);
-    // 1st day of the selected month
-    var firstDayOfCurrentMonth = new Date(y, m, 1).getDay();
+    var firstDayOfCurrentMonth = new Date(y, m, 1).getDay();// 1st day of the selected month
     console.log("firstDayOfCurrentMonth == ", firstDayOfCurrentMonth);
-    // Last date of the selected month
-    var lastDateOfCurrentMonth = new Date(y, m + 1, 0).getDate();
+    var lastDateOfCurrentMonth = new Date(y, m + 1, 0).getDate(); // Last date of the selected month
     console.log("lastDateOfCurrentMonth == ", lastDateOfCurrentMonth);
-    // Last day of the previous month
-    console.log("m == ", m);
+    console.log("m == ", m);// Last day of the previous month
     var lastDateOfLastMonth = m == 0 ? new Date(y - 1, 11, 0).getDate() : new Date(y, m, 0).getDate();
     console.log("lastDateOfLastMonth == ", lastDateOfLastMonth);
     console.log("Print selected month and year.");
     var monthandyearhtml = '<span id="monthandyearspan">' + this.Months[m] + ' - ' + y + '</span>';
     console.log("monthandyearhtml == " + monthandyearhtml);
     var html = '<table>';
-    // Write the header of the days of the week
-    html += '<tr>';
+    html += '<tr>';// Write the header of the days of the week
     console.log(" ");
     console.log("Write the header of the days of the week");
     for (var i = 0; i < 7; i++) {
         console.log("i == ", i);
         console.log("this.DaysOfWeek[i] == ", this.DaysOfWeek[i]);
         html += '<th class="daysheader">' + this.DaysOfWeek[i] + '</th>';
-    }
+    } 
 
     html += '</tr>';
     console.log("Before conditional operator this.f == ", this.f);
-    //this.f = 'X';
-
     var p = dm = this.f == 'M' ? 1 : firstDayOfCurrentMonth == 0 ? -5 : 2;
     console.log("After conditional operator");
     console.log("this.f == ", this.f);
@@ -148,25 +135,20 @@ Calendar.prototype.Calendar = function (y, m) {
                 html += '<td id="prevmonthdates">' +
                         '<span id="cellvaluespan">' + (cellvalue) + '</span><br/>' +
                         '</td>';
-
             } else if (d > lastDateOfCurrentMonth) {
                 console.log("d > lastDateOfCurrentMonth");
                 console.log("p before p++ == " + p);
                 html += '<td id="nextmonthdates">' + (p++) + '</td>';
                 console.log("p after p++ == " + p);
-                // Current month dates
-            } else {
+                } else {// Current month dates
                 html += '<td id="currentmonthdates">' + (d) +
-                        '<div id="replaceButton"><input type="radio" name="timeOff" value="Vacation">Vacation <br>' +
-                        '<input type="radio"  name="timeOff" value="Sick">Sick</div>' +
-                        '<button type= "button" onclick= "loadJSON()">Enter</button><br>' +
-                        /*'<button type= "button" onclick= "saveStorage()">Save</button>' + 
-                        '<button type= "button" onclick= "clearLocal()">Clear</button>' +*/ '</td>';
+                        '<div class="replaceButton"><input type="radio" name="timeOff" value="Vacation">Vacation <br>' +
+                        '<input type="radio"  name="timeOff" value="Sick">Sick' +
+                        '<button type= "button" class="jsonButton" onclick= "loadJSON(this)">Enter</button></div>' + '</td>';
                 console.log("d inside else { == " + d); //days?
                 p = 1;
                 console.log("p inside } else { == " + p);
             }
-
             if (i % 7 == 6 && d >= lastDateOfCurrentMonth) {
                 console.log("INSIDE if (i % 7 == 6 && d >= lastDateOfCurrentMonth) {");
                 console.log("i == " + i);
@@ -174,26 +156,20 @@ Calendar.prototype.Calendar = function (y, m) {
                 console.log("z0 == " + z0);
                 z0 = 10; // no more rows
             }
-
             console.log("i before i++ == " + i);
             i++;
             console.log("i after i++ == " + i);
         }
-
         html += '</tr>';
     }
-
-    // Closes table
-    html += '</table>';
+    html += '</table>'; // Closes table
     document.getElementById("monthandyear").innerHTML = monthandyearhtml;
     document.getElementById(this.divId).innerHTML = html;
-};
+      };
 
-// On Load of the window
-window.onload = function () {
+window.onload = function () {// On Load of the window
 
-    // Start calendar
-    var c = new Calendar({
+       var c = new Calendar({ // Start calendar
         ParentID: "divcalendartable",
         DaysOfWeek: ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'],
         Months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
@@ -206,10 +182,9 @@ window.onload = function () {
     getId('btnNext').onclick = function () {
         c.nextMonth();
     };
-
 };
 
-function loadJSON() {
+function loadJSON(el) { //ajax and json
     var data_file = "/views/dataThree.json";
     var http_request = new XMLHttpRequest();
     try {
@@ -226,32 +201,16 @@ function loadJSON() {
             }
         }
     }
-
     http_request.onreadystatechange = function () {
         if (http_request.readyState == 4) {
             var jsonObj = JSON.parse(http_request.responseText);
-            document.getElementById("replaceButton").innerHTML = jsonObj.answer;
+            el.innerHTML = jsonObj.answer;
         }
     };
     http_request.open("GET", data_file, true);
     http_request.send();
 }
-/*function saveStorage() {
-    if (typeof (Storage) !== "undefined") {
-        localStorage.setItem("answer", "Recorded");
-        //var save=localStorage.setItem("answer");
-        var save = localStorage.getItem("answer");
-        //document.getElementById("replaceButton").innerHTML=localStorage.getItem("answer");
-    } else {
-        document.getElementById("replaceButton").innerHTML = "Sorry, your browser does not support web storage";
-    }
-}
 
-function clearLocal() {
-    clear: localStorage.clear();
-    return false;
-}*/
-
-// Get element by id
-function getId(id) {
+function getId(id) {// Get element by id
     return document.getElementById(id);
+}

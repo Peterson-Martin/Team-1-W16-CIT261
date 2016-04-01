@@ -99,18 +99,35 @@ input[type=range]:focus::-ms-fill-upper {
         <script>
             
         
-        Storage.prototype.setObj = function(key, obj) {
+       /* Storage.prototype.setObj = function(key, obj) {
           return this.setItem(key, JSON.stringify(obj));
         };
         Storage.prototype.getObj = function(key) {
          return JSON.parse(this.getItem(key));
-       };       
+       };*/       
          
-         var times = [];
          
-            new Date(year, month, day, hours, minutes, seconds);
+         //new Date(year, month, day, hours, minutes, seconds);
+    
+    
+        function timePunch(){
+            
+            var times = [];
+            times.push(JSON.parse(localStorage.getItem("session")));            
+            var d = new Date();
+            times.push(d);            
+            var newPunch = "";                
+                for (index = 0; index < times.length; index++) {                    
+                    newPunch += times[index] + "<br>";                    
+                }          
+                                         
+                localStorage.setItem("session", JSON.stringify(newPunch));
+                document.getElementById("displayTime").innerHTML = JSON.parse(localStorage.getItem("session"));
+        }      
+          
+       
         
-        function timePunch(){   
+       /* function timePunch(){   
                                           
             var d = new Date();
             times.push(d);            
@@ -127,20 +144,18 @@ input[type=range]:focus::-ms-fill-upper {
                 localStorage.setObj("timePunch", newPunch);
                 document.getElementById("displayTime").innerHTML = localStorage.getObj("timePunch");
             
-        }             
+        }             */
         
         function storage()
 	{
             
-            document.getElementById("displayTimeAgain").innerHTML = "Stored Time: " + localStorage.getObj("timePunch");
-            var old = localStorage.getObj("timePunch");
-            localStorage.setObj("timepunch", old);
+            document.getElementById("displayTime").innerHTML = JSON.parse(localStorage.getItem("session"));            
 	}
         
         
 	</script>
     </head>  
-    <body>         
+    <body onload ="storage()">         
         <header>            
             <?php include $_SERVER['DOCUMENT_ROOT'].'/modules/header.php'; ?>
         </header>
@@ -150,11 +165,7 @@ input[type=range]:focus::-ms-fill-upper {
         <input type="range" min="0" max="50" value="0" step="50" onchange="timePunch()"/> 
         <br><br><br>               
        
-        <div id="displayTime"></div> 
-        <button onclick="storage()">Check</button>
-        <div id="displayTimeAgain"></div>
-        
-        
+        <div id="displayTime" style="overflow: scroll; height:200px; width:400px; font-size: 13px;"></div> 
         
         <footer>
                       

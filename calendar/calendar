@@ -1,9 +1,9 @@
- <div class="divcalendar">
+ <div class="divcalendar ">
 
                 <div id="calendaroverallcontrols">
 
                     <div id="calendarmonthcontrols">
-                     
+
                         <a id="btnPrev" href="#" title="Previous Month"><span><</span></a>
 
                         <div id="monthandyear"></div>

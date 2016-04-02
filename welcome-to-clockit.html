@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    $.ajax({url:"http://robertlchristensen.com/dom.html",success:function(result){
+      $("#div1").html(result);
+    }});
+  });
+});
+</script>
+</head>
+<body>
+<div id="div1"><h2>Welcome to Clock It! Clock below to log your hours:</h2><br>
+<button>Log Hours Here:</button>
+</div>
+
+</body>
+</html>

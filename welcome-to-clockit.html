@@ -1,22 +1,38 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js">
-</script>
-<script>
-$(document).ready(function(){
-  $("button").click(function(){
-    $.ajax({url:"http://robertlchristensen.com/dom.html",success:function(result){
-      $("#div1").html(result);
-    }});
-  });
-});
-</script>
+  <meta charset="utf-8">
+  <title>RobertLChristensen.com</title>
+  <meta name="description" content="RLC Media">
+  <meta name="author" content="RLCMedia">
 </head>
 <body>
-<div id="div1"><h2>Welcome to Clock It! Clock below to log your hours:</h2><br>
-<button>Log Hours Here:</button>
+ <div id="div1">
+<center><h1>
+Please Login:
+</h1></center>
+<center><p>The Username is "username" and the Password is "password"</p></center>
+<center><form name="login">
+Username:<input type="text" name="userid"/>
+Password:<input type="password" name="pswrd"/>
+<input type="button" onclick="check(this.form)" value="Login"/>
+<input type="reset" value="Cancel"/>
+</form></center>
 </div>
+<script language="javascript">
+function check(form)/*function to check userid & password*/
+{
+ /*the following code checkes whether the entered userid and password are matching*/
+ if(form.userid.value == "username" && form.pswrd.value == "password")
+  {
+    window.open('http://www.theinspiredwebdesign.com/views/calendar.php','_self')/*opens the target page while Id & password matches*/
+  }
+ else
+ {
+   alert("Incorrect Username or Password")/*displays error message*/
+  }
+}
 
+</script>
 </body>
 </html>
